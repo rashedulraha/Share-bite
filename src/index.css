@@ -1,0 +1,41 @@
+/* ! Google font name : Montserrat */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+/* !Google font Name : Inter   */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+/*! Google font Name : Baloo 2  */
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&display=swap");
+
+/*! DaisyUI Custom Theme */
+@import "tailwindcss";
+@plugin "daisyui";
+@import "tailwindcss";
+@plugin "daisyui";
+@plugin "daisyui/theme" {
+  name: "dark";
+  default: true;
+
+  --color-primary: #22d3a6;
+  --color-secondary: #0ea5e9;
+  --color-accent: #ef4444;
+  --color-neutral: #1e3a3f;
+  --color-base-100: #0d1b1e;
+  --color-base-200: #122427;
+  --color-base-content: #ffffff;
+  --color-muted: rgba(255, 255, 255, 0.7);
+
+  /* 🎛️ Rounded & Button settings */
+  --rounded-box: 1.25rem;
+  --rounded-btn: 0.75rem;
+  --btn-focus-scale: 0.97;
+  --animation-btn: 0.25s;
+}
+
+/*  font-family: "Montserrat", sans-serif; */
+/* font-family: "Baloo 2", sans-serif; */
+
+body {
+  font-family: "Inter", sans-serif;
+}
