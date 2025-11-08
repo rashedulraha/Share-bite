@@ -15,8 +15,14 @@ import {
   FaTruck,
   FaClock,
 } from "react-icons/fa";
-
+import { BsTwitterX } from "react-icons/bs";
 import Container from "../Responsive/Container";
+
+const SocialsLink = [
+  { Icon: FaFacebook, link: "https://www.facebook.com/rashedulraha/" },
+  { Icon: BsTwitterX, link: "https://x.com/rashedulraha" },
+  { Icon: FaInstagram, link: "https://www.instagram.com/rashedulraha/" },
+];
 
 const Footer = () => {
   return (
@@ -37,21 +43,14 @@ const Footer = () => {
             <p className="text-muted leading-relaxed">
               Reducing food waste by connecting surplus meals with those in
               need.
-              <span className="inline-flex items-center gap-1 ml-1">
-                <FaHeart className="w-4 h-4 text-accent" /> One plate, one
-                impact.
-              </span>
             </p>
             {/* Socials */}
             <div className="flex gap-3">
-              {[
-                { Icon: FaFacebook, link: "#" },
-                { Icon: FaTwitter, link: "#" },
-                { Icon: FaInstagram, link: "#" },
-              ].map(({ Icon, link }, i) => (
+              {SocialsLink.map(({ Icon, link }, i) => (
                 <a
                   key={i}
                   href={link}
+                  target="_blank"
                   className="btn btn-circle btn-outline border-white/30 hover:bg-primary hover:border-primary hover:text-base-100 transition-all">
                   <Icon className="w-5 h-5" />
                 </a>
