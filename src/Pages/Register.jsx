@@ -1,16 +1,46 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
 import Container from "../Components/Responsive/Container";
+import { SiIfood } from "react-icons/si";
+import AuthContext from "../Contaxt/AuthContext";
 
 const Register = () => {
+  const user = useContext(AuthContext);
+
+  const handleRegisterAccount = (e) => {
+    e.preventDefault();
+    console.log("Hello world");
+    const firstName = e.target.firstName.value;
+    const email = e.target.email.value;
+    const photoUrl = e.target.photoURL.value;
+    const password = e.target.password.value;
+    const useInformation = {
+      firstName,
+      email,
+      photoUrl,
+      password,
+    };
+    console.log(useInformation);
+  };
+
   return (
     <Container>
       <div className="md:w-md bg-base-100   mx-auto border border-secondary/30 rounded-md my-5">
         <div className="p-5  space-y-5">
           {/* Title */}
           <div className="text-center">
+            <div className="flex items-center justify-center mb-3 border-b border-s-accent p-2">
+              <Link to="/" className="flex items-center gap-3">
+                <div className=" flex items-center justify-center font-bold text-2xl ">
+                  <SiIfood />
+                </div>
+                <span className="text-2xl font-bold ">
+                  Share <span className="text-primary">bite</span>
+                </span>
+              </Link>
+            </div>
             <h2 className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-1">
               Create Account
             </h2>
@@ -19,8 +49,9 @@ const Register = () => {
             </p>
           </div>
 
-          {/* Name Fields */}
-          <div className="grid grid-cols-2 gap-3">
+          <form className="space-y-5" onSubmit={handleRegisterAccount}>
+            {/* Name Fields */}
+
             <div>
               <label
                 htmlFor="firstName"
@@ -28,114 +59,101 @@ const Register = () => {
                 First Name
               </label>
               <input
-                id="firstName"
+                name="firstName"
                 type="text"
                 className="input input-bordered input-sm w-full rounded-lg focus:border-primary transition-all"
                 placeholder="First name"
               />
             </div>
+
+            {/* Email */}
             <div>
               <label
-                htmlFor="lastName"
+                htmlFor="email"
                 className="block text-xs font-medium text-base-content mb-1">
-                Last Name
+                Email Address
               </label>
               <input
-                id="lastName"
-                type="text"
+                name="email"
+                type="email"
                 className="input input-bordered input-sm w-full rounded-lg focus:border-primary transition-all"
-                placeholder="Last name"
+                placeholder="you@example.com"
               />
             </div>
-          </div>
 
-          {/* Email */}
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-xs font-medium text-base-content mb-1">
-              Email Address
-            </label>
-            <input
-              id="email"
-              type="email"
-              className="input input-bordered input-sm w-full rounded-lg focus:border-primary transition-all"
-              placeholder="you@example.com"
-            />
-          </div>
+            {/* Image  Fields */}
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label
+                  htmlFor="url"
+                  className="block text-xs font-medium text-base-content mb-1">
+                  Awesome Photo Url
+                </label>
+                <input
+                  name="photoURL"
+                  type="url"
+                  className="input input-bordered input-sm w-full rounded-lg focus:border-primary transition-all"
+                  placeholder="Enter your awesome photo url"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="Password"
+                  className="block text-xs font-medium text-base-content mb-1">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  name="password"
+                  className="input input-bordered input-sm w-full rounded-lg focus:border-primary transition-all"
+                  placeholder="••••••••"
+                />
+              </div>
+            </div>
 
-          {/* Password Fields */}
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-xs font-medium text-base-content mb-1">
-                Password
-              </label>
-              <input
-                id="password"
-                type="password"
-                className="input input-bordered input-sm w-full rounded-lg focus:border-primary transition-all"
-                placeholder="••••••••"
-              />
+            {/* Divider */}
+            <div className="relative my-6">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-neutral"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-4 bg-base-100 text-muted">
+                  Or continue with
+                </span>
+              </div>
             </div>
-            <div>
-              <label
-                htmlFor="confirmPassword"
-                className="block text-xs font-medium text-base-content mb-1">
-                Confirm
-              </label>
-              <input
-                id="confirmPassword"
-                type="password"
-                className="input input-bordered input-sm w-full rounded-lg focus:border-primary transition-all"
-                placeholder="••••••••"
-              />
-            </div>
-          </div>
 
-          {/* Divider */}
-          <div className="relative my-6">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-neutral"></div>
+            {/* Social Buttons */}
+            <div className="grid grid-cols-2 gap-3">
+              <button className="btn btn-outline flex items-center justify-center py-2 text-sm font-medium hover:bg-primary hover:text-base-100 transition-all border-neutral">
+                <FcGoogle className="mr-2 text-lg" />
+                Google
+              </button>
+              <button className="btn btn-outline flex items-center justify-center py-2 text-sm font-medium hover:bg-primary hover:text-base-100 transition-all border-neutral">
+                <FaFacebook className="mr-2 text-lg text-blue-600" />
+                Facebook
+              </button>
             </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-base-100 text-muted">
-                Or continue with
-              </span>
-            </div>
-          </div>
 
-          {/* Social Buttons */}
-          <div className="grid grid-cols-2 gap-3">
-            <button className="btn btn-outline flex items-center justify-center py-2 text-sm font-medium hover:bg-primary hover:text-base-100 transition-all border-neutral">
-              <FcGoogle className="mr-2 text-lg" />
-              Google
+            {/* Links */}
+            <div className="flex justify-between items-center text-xs">
+              <Link to="/login" className="text-primary hover:underline">
+                Already have an account?
+              </Link>
+              <Link
+                to="/forgot-password"
+                className="text-primary hover:underline font-medium">
+                Forgot Password?
+              </Link>
+            </div>
+
+            {/* Submit */}
+            <button
+              type="submit"
+              className="btn btn-primary w-full bg-gradient-to-r from-primary to-secondary text-base-100 rounded-md  shadow-none ">
+              Create Account
             </button>
-            <button className="btn btn-outline flex items-center justify-center py-2 text-sm font-medium hover:bg-primary hover:text-base-100 transition-all border-neutral">
-              <FaFacebook className="mr-2 text-lg text-blue-600" />
-              Facebook
-            </button>
-          </div>
-
-          {/* Links */}
-          <div className="flex justify-between items-center text-xs">
-            <Link to="/login" className="text-primary hover:underline">
-              Already have an account?
-            </Link>
-            <Link
-              to="/forgot-password"
-              className="text-primary hover:underline font-medium">
-              Forgot Password?
-            </Link>
-          </div>
-
-          {/* Submit */}
-          <button
-            type="submit"
-            className="btn btn-primary w-full bg-gradient-to-r from-primary to-secondary text-base-100 rounded-md  shadow-none ">
-            Create Account
-          </button>
+          </form>
         </div>
       </div>
     </Container>

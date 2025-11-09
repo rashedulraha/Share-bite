@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
 import Container from "../Components/Responsive/Container";
+import { SiIfood } from "react-icons/si";
 
 const Login = () => {
   return (
@@ -11,6 +12,16 @@ const Login = () => {
         <div className="p-6 md:p-8 space-y-6">
           {/* Title */}
           <div className="text-center">
+            <div className="flex items-center justify-center mb-3 border-b border-s-accent p-2">
+              <Link to="/" className="flex items-center gap-3">
+                <div className=" flex items-center justify-center font-bold text-2xl ">
+                  <SiIfood />
+                </div>
+                <span className="text-2xl font-bold ">
+                  Share <span className="text-primary">bite</span>
+                </span>
+              </Link>
+            </div>
             <h2 className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-1">
               Welcome Back
             </h2>
