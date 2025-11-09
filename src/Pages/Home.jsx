@@ -2,6 +2,7 @@ import React from "react";
 
 import Container from "../Components/Responsive/Container";
 import HowItWorks from "../Components/Ui/HowItWorks";
+import OurMission from "../Components/Ui/OurMission";
 
 const Home = () => {
   return (
@@ -10,6 +11,7 @@ const Home = () => {
         <h1>Home</h1>
       </Container>
       <HowItWorks />
+      <OurMission />
     </div>
   );
 };
