@@ -7,6 +7,9 @@ import Forgot from "../Pages/Forgot";
 import AvailableFoods from "../Pages/AvailableFoods";
 import AddFood from "../Pages/AddFood";
 import PrivetRoutes from "../Components/PrivetRoutes/PrivetRoutes";
+import Profile from "../Pages/Profile";
+import MyRequests from "../Pages/MyRequests";
+import MyListings from "../Pages/MyListings";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +23,30 @@ const router = createBrowserRouter([
         element: (
           <PrivetRoutes>
             <AddFood />
+          </PrivetRoutes>
+        ),
+      },
+      {
+        path: "/profile",
+        element: (
+          <PrivetRoutes>
+            <Profile />
+          </PrivetRoutes>
+        ),
+      },
+      {
+        path: "/my-request",
+        element: (
+          <PrivetRoutes>
+            <MyRequests />
+          </PrivetRoutes>
+        ),
+      },
+      {
+        path: "/my-listings",
+        element: (
+          <PrivetRoutes>
+            <MyListings />
           </PrivetRoutes>
         ),
       },

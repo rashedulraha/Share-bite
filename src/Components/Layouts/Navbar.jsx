@@ -1,6 +1,14 @@
 import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { FaHome, FaBoxOpen, FaBars, FaTimes } from "react-icons/fa";
+import {
+  FaHome,
+  FaBoxOpen,
+  FaBars,
+  FaTimes,
+  FaHandsHelping,
+  FaListUl,
+} from "react-icons/fa";
+import { FaUser } from "react-icons/fa6";
 import { IoIosAddCircle } from "react-icons/io";
 import Container from "../Responsive/Container";
 import { SiIfood } from "react-icons/si";
@@ -11,6 +19,10 @@ import { toast } from "react-toastify";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, signout } = useContext(AuthContext);
+
+  const photoURL = user?.photoURL;
+  const displayName = user?.displayName;
+  console.log(photoURL, displayName);
 
   const handleUserLogout = () => {
     signout().then(() => {
@@ -23,17 +35,41 @@ const Navbar = () => {
       <div className="dropdown md:dropdown-end ">
         <div tabIndex={0} role="button">
           {user && (
-            <img
-              className="rounded-full border hover:bg-primary hover:text-white transition-all w-8 md:w-10 h-8 md:h-10 cursor-pointer"
-              src=""
-              alt="user Image"
-            />
+            <div
+              className="md:tooltip md:tooltip-bottom"
+              data-tip={`${displayName}`}>
+              <img
+                className="-full border hover:bg-primary hover:text-white transition-all w-8 md:w-10 h-8 md:h-10 cursor-pointer rounded-full"
+                src={
+                  photoURL ||
+                  `https://cdn-icons-png.freepik.com/512/219/219988.png`
+                }
+                alt="user Image"
+              />
+            </div>
           )}
         </div>
         <ul
           tabIndex={0}
-          className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[9999] mt-5 md:mt-4 w-60 p-4 shadow-xl border border-base-300">
-          <h2>Hello element</h2>
+          className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[9999] mt-5 md:mt-4 w-60 p-4 shadow-xl border border-base-300 space-y-3">
+          <Link
+            to={"/profile"}
+            className="flex items-center w-full md:w-fit text-start sm:text-center gap-2 hover:text-primary transition-all">
+            <FaUser className="text-primary" />
+            Profile
+          </Link>
+          <Link
+            to={"/my-request"}
+            className="flex items-center w-full md:w-fit text-start sm:text-center gap-2 hover:text-primary transition-all">
+            <FaHandsHelping className="text-primary" />
+            My Requests
+          </Link>
+          <Link
+            to={"/my-listings"}
+            className="flex items-center w-full md:w-fit text-start sm:text-center gap-2 hover:text-primary transition-all">
+            <FaListUl className="text-primary" />
+            My Listings
+          </Link>
         </ul>
       </div>
     </>
