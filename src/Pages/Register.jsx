@@ -1,14 +1,18 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { FaFacebook } from "react-icons/fa";
+import { FaEyeSlash, FaFacebook } from "react-icons/fa";
 import Container from "../Components/Responsive/Container";
 import { SiIfood } from "react-icons/si";
 import AuthContext from "../Contaxt/AuthContext";
 import { toast } from "react-toastify";
+import { EyeIcon } from "lucide-react";
 
 const Register = () => {
-  const { Register, WithGoogle } = useContext(AuthContext);
+  const { Register, WithGoogle, loading } = useContext(AuthContext);
+  const [loadingSpinner, setLoadingSpinner] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -37,9 +41,11 @@ const Register = () => {
   };
 
   const handleRegisterWithGoogle = () => {
+    setLoadingSpinner(true);
     WithGoogle().then(() => {
       toast.success("successfully register");
       navigate("/");
+      setLoadingSpinner(false);
     });
   };
 
@@ -116,30 +122,57 @@ const Register = () => {
                   placeholder="Enter your awesome photo url"
                 />
               </div>
-              <div>
+              <div className="relative">
                 <label
                   htmlFor="Password"
                   className="block text-xs font-medium text-base-content mb-1">
                   Password
                 </label>
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   name="password"
-                  className="input input-bordered input-sm w-full rounded-lg focus:border-primary transition-all"
+                  className="input input-bordered input-sm w-full rounded-lg focus:border-primary transition-all pr-10 "
                   placeholder="••••••••"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 -right-1 z-20 top-5 flex items-center pr-3 text-gray-500 hover:text-gray-700">
+                  {showPassword ? (
+                    <FaEyeSlash className="h-5 w-5" />
+                  ) : (
+                    <EyeIcon className="h-5 w-5" />
+                  )}
+                </button>
               </div>
             </div>
 
             <p className="text-red-500 text-sm ">{error}</p>
 
             {/* Submit */}
-            <button
-              type="submit"
-              className="btn btn-primary w-full bg-gradient-to-r from-primary to-secondary text-base-100 rounded-md  shadow-none ">
-              Create Account
-            </button>
+            {loading ? (
+              <div className="btn btn-primary w-full  text-base-100 rounded-md  shadow-none border-none bg-gradient-to-r from-primary/40 to-secondary/40  ">
+                <span className="loading loading-infinity "></span>
+              </div>
+            ) : (
+              <button
+                type="submit"
+                className="btn btn-primary w-full bg-gradient-to-r from-primary to-secondary text-base-100 rounded-md  shadow-none border-none">
+                Register
+              </button>
+            )}
           </form>
+          {/* Links */}
+          <div className="flex justify-between items-center text-xs">
+            <Link to="/login" className="text-primary hover:underline">
+              Already have an account?
+            </Link>
+            <Link
+              to="/forgot-password"
+              className="text-primary hover:underline font-medium">
+              Forgot Password?
+            </Link>
+          </div>
           {/* Divider */}
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
@@ -154,28 +187,24 @@ const Register = () => {
 
           {/* Social Buttons */}
           <div className="grid grid-cols-2 gap-3">
+            {loadingSpinner ? (
+              <div className="btn btn-primary w-full  text-base-100 rounded-md  shadow-none border-none bg-gradient-to-r from-primary/40 to-secondary/40  ">
+                <span className="loading loading-infinity "></span>
+              </div>
+            ) : (
+              <button
+                onClick={handleRegisterWithGoogle}
+                className="btn btn-outline flex items-center justify-center py-2 text-sm font-medium hover:bg-primary hover:text-base-100 transition-all border-neutral">
+                <FcGoogle className="mr-2 text-lg" />
+                Google
+              </button>
+            )}
             <button
-              onClick={handleRegisterWithGoogle}
-              className="btn btn-outline flex items-center justify-center py-2 text-sm font-medium hover:bg-primary hover:text-base-100 transition-all border-neutral">
-              <FcGoogle className="mr-2 text-lg" />
-              Google
-            </button>
-            <button className="btn btn-outline flex items-center justify-center py-2 text-sm font-medium hover:bg-primary hover:text-base-100 transition-all border-neutral">
+              disabled
+              className="btn btn-outline flex items-center justify-center py-2 text-sm font-medium hover:bg-primary hover:text-base-100 transition-all border-neutral cursor-not-allowed">
               <FaFacebook className="mr-2 text-lg text-blue-600" />
               Facebook
             </button>
-          </div>
-
-          {/* Links */}
-          <div className="flex justify-between items-center text-xs">
-            <Link to="/login" className="text-primary hover:underline">
-              Already have an account?
-            </Link>
-            <Link
-              to="/forgot-password"
-              className="text-primary hover:underline font-medium">
-              Forgot Password?
-            </Link>
           </div>
         </div>
       </div>

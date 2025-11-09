@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import Container from "../Components/Responsive/Container";
 import HowItWorks from "../Components/Ui/HowItWorks";
@@ -6,8 +6,20 @@ import OurMission from "../Components/Ui/OurMission";
 import HeroSection from "../Components/Ui/HeroSection";
 import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
+import { BarLoader } from "react-spinners";
+import AuthContext from "../Contaxt/AuthContext";
 
 const Home = () => {
+  const { loading } = useContext(AuthContext);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center  h-screen z-50 absolute top-0 inset-0 bg-base-200">
+        <BarLoader color="#0ea5e9" />
+      </div>
+    );
+  }
+
   return (
     <div>
       <HeroSection />

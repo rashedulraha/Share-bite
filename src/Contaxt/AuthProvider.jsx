@@ -5,6 +5,7 @@ import {
   GoogleAuthProvider,
   onAuthStateChanged,
   sendEmailVerification,
+  signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
 } from "firebase/auth";
@@ -40,13 +41,29 @@ const AuthProvider = ({ children }) => {
 
   //! Register and Login with Google
   const WithGoogle = async () => {
-    setLoading(true);
-
     try {
       const result = await signInWithPopup(auth, googleProvider);
       return result;
     } catch (error) {
       toast.error("signin failed");
+      throw error;
+    }
+  };
+
+  // ! sign in user
+  const signinUser = async (email, password) => {
+    setLoading(true);
+    try {
+      const userInformation = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      const user = userInformation.user;
+      return user;
+    } catch (error) {
+      toast.error("Login failed please try again");
       throw error;
     } finally {
       setLoading(false);
@@ -71,6 +88,7 @@ const AuthProvider = ({ children }) => {
   //! shared value using auth Provider
   const useInformation = {
     Register,
+    signinUser,
     signout,
     WithGoogle,
     user,

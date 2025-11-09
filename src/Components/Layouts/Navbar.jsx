@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { FaHome, FaBoxOpen, FaBars, FaTimes } from "react-icons/fa";
+import { IoIosAddCircle } from "react-icons/io";
 import Container from "../Responsive/Container";
 import { SiIfood } from "react-icons/si";
 import ThemeToggle from "../Theme/ThemeToggle";
@@ -32,6 +33,15 @@ const Navbar = () => {
           <FaBoxOpen className="text-primary" />
           Available Foods
         </NavLink>
+
+        {user && (
+          <NavLink
+            to={"/add-food"}
+            className="flex items-center gap-2 hover:text-primary transition-all">
+            <IoIosAddCircle className="text-primary" />
+            Add Food
+          </NavLink>
+        )}
       </div>
     </>
   );
