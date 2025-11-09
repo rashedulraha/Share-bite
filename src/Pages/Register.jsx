@@ -1,28 +1,46 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
 import Container from "../Components/Responsive/Container";
 import { SiIfood } from "react-icons/si";
 import AuthContext from "../Contaxt/AuthContext";
+import { toast } from "react-toastify";
 
 const Register = () => {
-  const user = useContext(AuthContext);
+  const { Register, WithGoogle } = useContext(AuthContext);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleRegisterAccount = (e) => {
     e.preventDefault();
     console.log("Hello world");
-    const firstName = e.target.firstName.value;
+    // const firstName = e.target.firstName.value;
+    // const photoUrl = e.target.photoURL.value;
     const email = e.target.email.value;
-    const photoUrl = e.target.photoURL.value;
     const password = e.target.password.value;
-    const useInformation = {
-      firstName,
-      email,
-      photoUrl,
-      password,
-    };
-    console.log(useInformation);
+
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$/;
+
+    if (!passwordRegex.test(password)) {
+      setError(
+        "Password must have at least one uppercase letter, one lowercase letter, one number, and be at least 6 characters long."
+      );
+    } else {
+      setError("");
+      Register(email, password).then(() => {
+        navigate("/");
+        toast.success("successfully create a account");
+        e.target.reset();
+      });
+    }
+  };
+
+  const handleRegisterWithGoogle = () => {
+    WithGoogle().then(() => {
+      toast.success("successfully register");
+      navigate("/");
+    });
   };
 
   return (
@@ -61,6 +79,7 @@ const Register = () => {
               <input
                 name="firstName"
                 type="text"
+                required
                 className="input input-bordered input-sm w-full rounded-lg focus:border-primary transition-all"
                 placeholder="First name"
               />
@@ -76,6 +95,7 @@ const Register = () => {
               <input
                 name="email"
                 type="email"
+                required
                 className="input input-bordered input-sm w-full rounded-lg focus:border-primary transition-all"
                 placeholder="you@example.com"
               />
@@ -111,41 +131,7 @@ const Register = () => {
               </div>
             </div>
 
-            {/* Divider */}
-            <div className="relative my-6">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-neutral"></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-base-100 text-muted">
-                  Or continue with
-                </span>
-              </div>
-            </div>
-
-            {/* Social Buttons */}
-            <div className="grid grid-cols-2 gap-3">
-              <button className="btn btn-outline flex items-center justify-center py-2 text-sm font-medium hover:bg-primary hover:text-base-100 transition-all border-neutral">
-                <FcGoogle className="mr-2 text-lg" />
-                Google
-              </button>
-              <button className="btn btn-outline flex items-center justify-center py-2 text-sm font-medium hover:bg-primary hover:text-base-100 transition-all border-neutral">
-                <FaFacebook className="mr-2 text-lg text-blue-600" />
-                Facebook
-              </button>
-            </div>
-
-            {/* Links */}
-            <div className="flex justify-between items-center text-xs">
-              <Link to="/login" className="text-primary hover:underline">
-                Already have an account?
-              </Link>
-              <Link
-                to="/forgot-password"
-                className="text-primary hover:underline font-medium">
-                Forgot Password?
-              </Link>
-            </div>
+            <p className="text-red-500 text-sm ">{error}</p>
 
             {/* Submit */}
             <button
@@ -154,6 +140,43 @@ const Register = () => {
               Create Account
             </button>
           </form>
+          {/* Divider */}
+          <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-neutral"></div>
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-4 bg-base-100 text-muted">
+                Or continue with
+              </span>
+            </div>
+          </div>
+
+          {/* Social Buttons */}
+          <div className="grid grid-cols-2 gap-3">
+            <button
+              onClick={handleRegisterWithGoogle}
+              className="btn btn-outline flex items-center justify-center py-2 text-sm font-medium hover:bg-primary hover:text-base-100 transition-all border-neutral">
+              <FcGoogle className="mr-2 text-lg" />
+              Google
+            </button>
+            <button className="btn btn-outline flex items-center justify-center py-2 text-sm font-medium hover:bg-primary hover:text-base-100 transition-all border-neutral">
+              <FaFacebook className="mr-2 text-lg text-blue-600" />
+              Facebook
+            </button>
+          </div>
+
+          {/* Links */}
+          <div className="flex justify-between items-center text-xs">
+            <Link to="/login" className="text-primary hover:underline">
+              Already have an account?
+            </Link>
+            <Link
+              to="/forgot-password"
+              className="text-primary hover:underline font-medium">
+              Forgot Password?
+            </Link>
+          </div>
         </div>
       </div>
     </Container>

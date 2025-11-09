@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { FaHome, FaBoxOpen, FaBars, FaTimes } from "react-icons/fa";
 import Container from "../Responsive/Container";
 import { SiIfood } from "react-icons/si";
 import ThemeToggle from "../Theme/ThemeToggle";
+import AuthContext from "../../Contaxt/AuthContext";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, signout } = useContext(AuthContext);
+
+  const handleUserLogout = () => {
+    signout().then(() => {
+      toast.success("Logout successfully");
+    });
+  };
 
   const MenuLink = (
     <>
@@ -66,11 +75,19 @@ const Navbar = () => {
           <div className="navbar-end flex items-center gap-5">
             {/* Theme toggle */}
             <ThemeToggle />
-            <Link
-              to="/login"
-              className="btn btn-primary rounded-full px-6 shadow-md hover:shadow-lg transition-all">
-              Login
-            </Link>
+            {user ? (
+              <button
+                onClick={handleUserLogout}
+                className="btn btn-primary rounded-full px-6 shadow-md hover:shadow-lg transition-all">
+                Logout
+              </button>
+            ) : (
+              <Link
+                to="/login"
+                className="btn btn-primary rounded-full px-6 shadow-md hover:shadow-lg transition-all">
+                Login
+              </Link>
+            )}
           </div>
         </div>
       </Container>

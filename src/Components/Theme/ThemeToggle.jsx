@@ -2,22 +2,26 @@ import React, { useEffect, useState } from "react";
 import { FaMoon, FaSun } from "react-icons/fa";
 
 const ThemeToggle = () => {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(null);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
     setTheme(savedTheme);
-    document.querySelector("html").setAttribute("data-theme", savedTheme);
+    document.documentElement.setAttribute("data-theme", savedTheme);
   }, []);
 
   useEffect(() => {
-    document.querySelector("html").setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
+    if (theme) {
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("theme", theme);
+    }
   }, [theme]);
 
   const handleToggle = () => {
     setTheme(theme === "light" ? "dark" : "light");
   };
+
+  if (!theme) return null;
 
   return (
     <label className="flex items-center gap-2 cursor-pointer">
