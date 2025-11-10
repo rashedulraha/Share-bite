@@ -4,7 +4,9 @@ import { useContext } from "react";
 import AuthContext from "../Contaxt/AuthContext";
 
 const AddFood = () => {
-  const { loading } = useContext(AuthContext);
+  const { loading, user } = useContext(AuthContext);
+  const { displayName, photoURL, email } = user || {};
+
   return (
     <Container>
       <div className="md:w-2xl bg-base-100 mx-auto border border-secondary/30 rounded-xl my-5 shadow-lg">
@@ -123,6 +125,58 @@ const AddFood = () => {
                 placeholder="Any special instructions or details..."></textarea>
             </div>
 
+            {/*  donar information  */}
+
+            <div className="flex flex-col md:flex-row  items-center justify-between gap-5">
+              {/* donar name */}
+              <div className="w-full">
+                <label
+                  htmlFor="donatorName"
+                  className="block text-xs font-medium text-base-content mb-1">
+                  Donator Name
+                </label>
+                <input
+                  name="donarName"
+                  type="text"
+                  required
+                  className="input input-bordered w-full rounded-lg focus:border-primary"
+                  defaultValue={displayName}
+                  readOnly
+                />
+              </div>
+              {/* Donar email  */}
+              <div className="w-full">
+                <label
+                  htmlFor="email"
+                  className="block text-xs font-medium text-base-content mb-1">
+                  Donator Email
+                </label>
+                <input
+                  name="email"
+                  type="email"
+                  defaultValue={email}
+                  readOnly
+                  required
+                  className="input input-bordered w-full rounded-lg focus:border-primary"
+                />
+              </div>
+            </div>
+            {/* donar image */}
+            <div className="w-full">
+              <label
+                htmlFor="donatorImage"
+                className="block text-xs font-medium text-base-content mb-1">
+                Donator Image URL
+              </label>
+              <input
+                name="donarImage"
+                type="url"
+                required
+                readOnly
+                className="input input-bordered w-full rounded-lg focus:border-primary"
+                defaultValue={photoURL}
+              />
+            </div>
             {/* Submit Button */}
             {loading ? (
               <div className="btn btn-primary w-full text-base-100 bg-gradient-to-r from-primary/40 to-secondary/40 border-none">

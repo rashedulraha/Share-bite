@@ -8,7 +8,9 @@ import FoodSearchSection from "../Components/Ui/FoodSearchSection";
 
 const AvailableFoods = () => {
   const { loading } = useContext(AuthContext);
-  const { foodCardData } = useAxios(`http://localhost:3000/all-food-data`);
+  const { foodCardData, dataFetchLoading } = useAxios(
+    `http://localhost:3000/all-food-data`
+  );
   const [searchTerm, setSearchTerm] = useState("");
 
   if (loading) {
@@ -28,13 +30,18 @@ const AvailableFoods = () => {
     <div>
       <Container>
         <FoodSearchSection onSearch={handleOnSearch} />
+
         <div className="py-10">
           {filterFood?.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filterFood.map((data) => (
-                <FoodCard data={data} key={data._id} />
-              ))}
-            </div>
+            dataFetchLoading ? (
+              <Skeleton url={`http://localhost:3000/all-food-data`} />
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filterFood.map((data) => (
+                  <FoodCard data={data} key={data._id} />
+                ))}
+              </div>
+            )
           ) : (
             <div className="text-center py-16">
               <div className="bg-base-200/50 backdrop-blur-sm rounded-3xl p-10 max-w-md mx-auto border border-neutral/20">

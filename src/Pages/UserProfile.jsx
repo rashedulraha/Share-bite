@@ -64,7 +64,7 @@ const ProfilePage = () => {
         <div className="max-w-4xl mx-auto p-6 rounded-md border border-neutral/20 bg-base-100">
           <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
             {/* Left: Avatar */}
-            <div className="flex flex-col items-center md:items-center">
+            <div className="flex  flex-col items-center md:items-center">
               <div className="avatar mb-4">
                 <div className="w-32 h-32 rounded-full ring ring-primary ring-offset-base-100 ring-offset-4">
                   <img src={photoURL} alt={name} className="object-cover" />
@@ -78,7 +78,7 @@ const ProfilePage = () => {
             {/* Right: Info + Actions */}
             <div className="flex-1 w-full text-center md:text-left">
               {/* Info Card */}
-              <div className="bg-base-200 rounded-2xl p-5 border border-neutral/20 text-sm mb-5">
+              <div className="bg-base-200 rounded-md p-5 border border-neutral/20 text-sm mb-5">
                 <p className="text-base-content mb-2">
                   <strong>Current time:</strong> {currentTime}
                 </p>

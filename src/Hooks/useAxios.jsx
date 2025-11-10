@@ -4,19 +4,19 @@ import React, { useEffect, useState } from "react";
 const useAxios = (url) => {
   const [foodCardData, setFoodCardData] = useState(null);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [dataFetchLoading, setDataFetchLoading] = useState(true);
 
   // Fetching side effect
 
   useEffect(() => {
-    setLoading(true);
+    setDataFetchLoading(true);
     axios(url)
       .then((res) => setFoodCardData(res.data))
       .catch((error) => setError(error.message))
-      .finally(() => setLoading(false));
+      .finally(() => setDataFetchLoading(false));
   }, [url]);
 
-  return { foodCardData, error, loading };
+  return { foodCardData, error, dataFetchLoading };
 };
 
 export default useAxios;

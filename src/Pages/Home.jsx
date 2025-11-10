@@ -11,10 +11,13 @@ import AuthContext from "../Contaxt/AuthContext";
 import LoadingSpinner from "../Components/shared/LoadingSpinner";
 import useAxios from "../Hooks/useAxios";
 import FoodCard from "../Components/shared/FoodCard";
+import Skeleton from "../Components/shared/Skeleton";
 
 const Home = () => {
   const { loading } = useContext(AuthContext);
-  const { foodCardData } = useAxios(`http://localhost:3000/popular-food-data`);
+  const { foodCardData, dataFetchLoading } = useAxios(
+    `http://localhost:3000/popular-food-data`
+  );
 
   if (loading) {
     return <LoadingSpinner />;
@@ -23,12 +26,18 @@ const Home = () => {
   return (
     <div>
       <HeroSection />
+
       <Container>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 py-10">
-          {foodCardData?.map((data) => (
-            <FoodCard data={data} key={data._id} />
-          ))}
-        </div>
+        {dataFetchLoading ? (
+          <Skeleton url={`http://localhost:3000/popular-food-data`} />
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 py-10">
+            {foodCardData?.map((data) => (
+              <FoodCard data={data} key={data._id} />
+            ))}
+          </div>
+        )}
+
         <div className="flex items-center justify-center">
           <Link
             to={"/available-foods"}
