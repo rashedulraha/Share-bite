@@ -51,7 +51,7 @@ const Navbar = () => {
           tabIndex={0}
           className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[9999] mt-5 md:mt-4 w-60 p-4 shadow-xl border border-base-300 space-y-3">
           <Link
-            to={"/profile"}
+            to={"/user-profile"}
             className="flex items-center w-full md:w-fit text-start sm:text-center gap-2 hover:text-primary transition-all">
             <FaUser className="text-primary" />
             Profile

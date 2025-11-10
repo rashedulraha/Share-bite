@@ -7,12 +7,13 @@ import Forgot from "../Pages/Forgot";
 import AvailableFoods from "../Pages/AvailableFoods";
 import AddFood from "../Pages/AddFood";
 import PrivetRoutes from "../Components/PrivetRoutes/PrivetRoutes";
-import Profile from "../Pages/Profile";
 import MyRequests from "../Pages/MyRequests";
 import MyListings from "../Pages/MyListings";
 import NotFound from "../Pages/NotFound";
 import FoodDetails from "../Pages/FoodDetails";
 import About from "../Pages/About";
+import DonorProfile from "../Pages/DonorProfile";
+import UserProfile from "../Pages/UserProfile";
 
 const router = createBrowserRouter([
   {
@@ -31,10 +32,10 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/profile",
+        path: "/user-profile",
         element: (
           <PrivetRoutes>
-            <Profile />
+            <UserProfile />
           </PrivetRoutes>
         ),
       },
@@ -66,6 +67,7 @@ const router = createBrowserRouter([
       { path: "login", Component: Login },
       { path: "forgot-password", Component: Forgot },
       { path: "about", Component: About },
+      { path: "donor-profile", Component: DonorProfile },
     ],
   },
 ]);

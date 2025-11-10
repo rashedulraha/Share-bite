@@ -14,6 +14,7 @@ import {
   FaCalendarAlt,
   FaCommentDots,
 } from "react-icons/fa";
+import { ImProfile } from "react-icons/im";
 import Container from "../Components/Responsive/Container";
 import useAxios from "../Hooks/useAxios";
 import AuthContext from "../Contaxt/AuthContext";
@@ -184,14 +185,21 @@ const FoodDetails = () => {
               </div>
 
               {/* Request Button */}
-              <div className="flex gap-4">
+              <div className="flex gap-4 flex-col md:flex-row">
                 <button
                   onClick={handleRequestModal}
-                  className="btn btn-primary btn-lg rounded-full flex-1 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3 group">
+                  className="btn btn-primary rounded-full shadow-none hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3 group">
                   Request Food
                   <FaShareAlt className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
-                <button className="btn btn-ghost btn-lg rounded-full p-3 hover:bg-base-200 transition-all">
+                <Link
+                  to={"/donor-profile"}
+                  className="btn btn-primary  rounded-full  shadow-none hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3 group">
+                  Donar profile
+                  <ImProfile className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+
+                <button className="btn btn-ghost  rounded-full p-3 hover:bg-base-200 transition-all">
                   <FaHeart className="w-6 h-6 text-base-content/70 hover:text-error transition-colors" />
                 </button>
               </div>
