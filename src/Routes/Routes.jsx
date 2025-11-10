@@ -67,7 +67,7 @@ const router = createBrowserRouter([
       { path: "login", Component: Login },
       { path: "forgot-password", Component: Forgot },
       { path: "about", Component: About },
-      { path: "donor-profile", Component: DonorProfile },
+      { path: "donor-profile/:id", Component: DonorProfile },
     ],
   },
 ]);

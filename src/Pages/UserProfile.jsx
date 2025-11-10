@@ -2,9 +2,10 @@ import React, { useContext, useRef, useState } from "react";
 import { FaEdit, FaSignOutAlt } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import Container from "../Components/Responsive/Container";
-import AuthContext from "../Contaxt/AuthContext";
+import AuthContext from "../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const ProfilePage = () => {
   const { user, deleteUserAccount, signout, updateUserProfile } =
@@ -20,16 +21,49 @@ const ProfilePage = () => {
   const country = "BD";
 
   const handleSignout = () => {
-    signout();
-    navigate("/login");
-    toast.success("Signout successfully");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#22d3a6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Me logout",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        signout();
+        navigate("/login");
+        Swal.fire({
+          title: "Logout successfully",
+          text: "Your account has been logout.",
+          icon: "success",
+        });
+      }
+    });
   };
 
   const handleDeleteAccount = () => {
-    deleteUserAccount().then(() => {
-      signout();
-      navigate("/register");
-      toast.success("Your account has bin delete successfully");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#22d3a6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Me logout",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteUserAccount().then(() => {
+          signout();
+          navigate("/register");
+        });
+
+        Swal.fire({
+          title: "Logout successfully",
+          text: "Your account has been logout.",
+          icon: "success",
+        });
+      }
     });
   };
 

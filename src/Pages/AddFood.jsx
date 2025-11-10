@@ -1,7 +1,7 @@
 import { SiIfood } from "react-icons/si";
 import Container from "../Components/Responsive/Container";
 import { useContext } from "react";
-import AuthContext from "../Contaxt/AuthContext";
+import AuthContext from "../Context/AuthContext";
 
 const AddFood = () => {
   const { loading, user } = useContext(AuthContext);

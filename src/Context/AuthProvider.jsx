@@ -43,17 +43,11 @@ const AuthProvider = ({ children }) => {
 
   //! delete user
   const deleteUserAccount = async () => {
-    try {
-      if (user) {
-        await deleteUser(user);
-        setUser(null);
-      }
-    } catch (error) {
-      toast.error(
-        "Failed to delete account. Please reauthenticate and try again.",
-        error.message
-      );
+    if (user) {
+      await deleteUser(user);
+      setUser(null);
     }
+    return false;
   };
 
   //! Register and Login with Google
@@ -93,7 +87,6 @@ const AuthProvider = ({ children }) => {
   };
 
   //! update user
-
   const updateUserProfile = async (userInformation) => {
     await updateProfile(user, userInformation);
     const profileUpdate = auth?.currentUser;

@@ -15,8 +15,9 @@ import { IoIosAddCircle } from "react-icons/io";
 import Container from "../Responsive/Container";
 import { SiIfood } from "react-icons/si";
 import ThemeToggle from "../Theme/ThemeToggle";
-import AuthContext from "../../Contaxt/AuthContext";
+import AuthContext from "../../Context/AuthContext";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,8 +27,23 @@ const Navbar = () => {
   const displayName = user?.displayName;
 
   const handleUserLogout = () => {
-    signout().then(() => {
-      toast.success("Logout successfully");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#22d3a6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Me logout",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        signout();
+        Swal.fire({
+          title: "Logout successfully",
+          text: "Your account has been logout.",
+          icon: "success",
+        });
+      }
     });
   };
 

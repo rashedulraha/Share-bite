@@ -13,7 +13,7 @@ import {
 import { ImProfile } from "react-icons/im";
 import Container from "../Components/Responsive/Container";
 import useAxios from "../Hooks/useAxios";
-import AuthContext from "../Contaxt/AuthContext";
+import AuthContext from "../Context/AuthContext";
 
 const FoodDetails = () => {
   const { loading } = useContext(AuthContext);
@@ -21,7 +21,7 @@ const FoodDetails = () => {
   const { id } = useParams();
   const showModalRef = useRef();
   const { foodCardData } = useAxios(`http://localhost:3000/food-details/${id}`);
-  const { name, image, quantity, pickup_location, expiry, notes } =
+  const { name, image, quantity, pickup_location, expiry, notes, _id } =
     foodCardData || {};
   const {
     name: DonarName,
@@ -184,7 +184,7 @@ const FoodDetails = () => {
                 Request Food
               </button>
               <Link
-                to={"/donor-profile"}
+                to={`/donor-profile/${_id}`}
                 className="btn btn-primary  rounded-full  shadow-none hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3 group">
                 Donar profile
                 <ImProfile className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -221,12 +221,12 @@ const FoodDetails = () => {
               <div className="space-y-1">
                 <label className="label">
                   <span className="label-text font-medium text-base-content">
-                    Quantity Requested
+                    Location
                   </span>
                 </label>
                 <input
                   type="text"
-                  placeholder="e.g., 2 kg"
+                  placeholder="Enter your location"
                   className="input input-bordered w-full rounded-lg focus:border-primary"
                 />
               </div>
@@ -235,12 +235,12 @@ const FoodDetails = () => {
               <div className="space-y-1">
                 <label className="label">
                   <span className="label-text font-medium text-base-content flex items-center gap-2">
-                    Preferred Pickup Date
+                    Contact Information
                   </span>
                 </label>
                 <input
                   type="text"
-                  placeholder="mm/dd/yyyy"
+                  placeholder="Enter your email or phone number"
                   className="input input-bordered w-full rounded-lg focus:border-primary"
                 />
               </div>

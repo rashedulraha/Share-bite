@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import Container from "../Components/Responsive/Container";
-import AuthContext from "../Contaxt/AuthContext";
+import AuthContext from "../Context/AuthContext";
 import LoadingSpinner from "../Components/shared/LoadingSpinner";
 import useAxios from "../Hooks/useAxios";
 import FoodCard from "../Components/shared/FoodCard";

@@ -1,4 +1,3 @@
-import React from "react";
 import {
   FaUser,
   FaEnvelope,
@@ -8,19 +7,35 @@ import {
   FaStar,
 } from "react-icons/fa";
 import Container from "../Components/Responsive/Container";
+import AuthContext from "../Context/AuthContext";
+import useAxios from "../Hooks/useAxios";
+import { useContext } from "react";
+import { useParams } from "react-router-dom";
+import LoadingSpinner from "../Components/shared/LoadingSpinner";
 
 const DonorProfile = () => {
-  const donor = {
-    name: "Golden Dragon Restaurant",
-    email: "goldendragon@food.com",
-    phone: "+880 1712-345678",
-    location: "123 Main St, Dhanmondi, Dhaka",
-    joined: "January 2023",
-    totalDonations: 156,
-    rating: 4.9,
-    photo:
-      "https://ui-avatars.com/api/?name=Golden+Dragon&background=ef4444&color=fff&bold=true&size=128",
-  };
+  const { id } = useParams();
+
+  const { loading } = useContext(AuthContext);
+
+  const { foodCardData } = useAxios(
+    `http://localhost:3000/donar-profile/${id}`
+  );
+
+  const {
+    email,
+    name,
+    photo,
+    rating,
+    phone,
+    joined,
+    location,
+    totalDonations,
+  } = foodCardData?.donor || {};
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <section className="py-10 bg-base-100 ">
@@ -31,28 +46,22 @@ const DonorProfile = () => {
             <div className="bg-base-200 rounded-md p-6 text-center border border-neutral/20">
               <div className="avatar mb-4">
                 <div className="w-36 h-36 rounded-full ring ring-primary ring-offset-base-100 ring-offset-4 mx-auto">
-                  <img src={donor.photo} alt={donor.name} />
+                  <img src={photo} alt={name} />
                 </div>
               </div>
-              <h2 className="text-xl font-bold text-base-content">
-                {donor.name}
-              </h2>
-              <p className="text-sm text-muted">Since {donor.joined}</p>
+              <h2 className="text-xl font-bold text-base-content">{name}</h2>
+              <p className="text-sm text-muted">Since {joined}</p>
 
               <div className="flex justify-center gap-1 text-yellow-500 mt-3">
                 {[...Array(5)].map((_, i) => (
                   <FaStar
                     key={i}
                     className={`w-5 h-5 ${
-                      i < Math.floor(donor.rating)
-                        ? "fill-current"
-                        : "text-base-300"
+                      i < Math.floor(rating) ? "fill-current" : "text-base-300"
                     }`}
                   />
                 ))}
-                <span className="text-sm text-muted ml-1">
-                  ({donor.rating})
-                </span>
+                <span className="text-sm text-muted ml-1">({rating})</span>
               </div>
             </div>
           </div>
@@ -67,15 +76,15 @@ const DonorProfile = () => {
               <div className="space-y-3 text-sm text-muted">
                 <div className="flex items-center gap-3">
                   <FaEnvelope className="w-4 h-4 text-secondary" />
-                  <span>{donor.email}</span>
+                  <span>{email}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <FaPhone className="w-4 h-4 text-accent" />
-                  <span>{donor.phone}</span>
+                  <span>{phone}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <FaMapMarkerAlt className="w-4 h-4 text-primary" />
-                  <span>{donor.location}</span>
+                  <span>{location}</span>
                 </div>
               </div>
             </div>
@@ -84,7 +93,7 @@ const DonorProfile = () => {
               <div className="bg-base-200 rounded-md p-5 text-center border border-neutral/20">
                 <FaHeart className="w-8 h-8 text-primary mx-auto mb-2" />
                 <p className="text-3xl font-bold text-base-content">
-                  {donor.totalDonations}
+                  {totalDonations}
                 </p>
                 <p className="text-sm text-muted">Total Donations</p>
               </div>

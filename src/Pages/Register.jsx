@@ -4,9 +4,9 @@ import { FcGoogle } from "react-icons/fc";
 import { FaEyeSlash, FaFacebook } from "react-icons/fa";
 import Container from "../Components/Responsive/Container";
 import { SiIfood } from "react-icons/si";
-import AuthContext from "../Contaxt/AuthContext";
 import { toast } from "react-toastify";
 import { EyeIcon } from "lucide-react";
+import AuthContext from "../Context/AuthContext";
 
 const Register = () => {
   const { Register, WithGoogle, loading } = useContext(AuthContext);

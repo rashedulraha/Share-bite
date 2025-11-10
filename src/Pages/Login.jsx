@@ -4,8 +4,9 @@ import { FcGoogle } from "react-icons/fc";
 import { FaEye, FaEyeSlash, FaFacebook } from "react-icons/fa";
 import Container from "../Components/Responsive/Container";
 import { SiIfood } from "react-icons/si";
-import AuthContext from "../Contaxt/AuthContext";
+
 import { toast } from "react-toastify";
+import AuthContext from "../Context/AuthContext";
 
 const Login = () => {
   const { signinUser, WithGoogle, loading } = useContext(AuthContext);

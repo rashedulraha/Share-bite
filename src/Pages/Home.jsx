@@ -7,7 +7,7 @@ import HeroSection from "../Components/Ui/HeroSection";
 import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 
-import AuthContext from "../Contaxt/AuthContext";
+import AuthContext from "../Context/AuthContext";
 import LoadingSpinner from "../Components/shared/LoadingSpinner";
 import useAxios from "../Hooks/useAxios";
 import FoodCard from "../Components/shared/FoodCard";
