@@ -1,6 +1,7 @@
 import React from "react";
 import { FaUtensils, FaArrowRight } from "react-icons/fa";
 import Container from "../Responsive/Container";
+import UserInfoCarouselCard from "../shared/UserInfoCarouselCard";
 
 const HeroSection = () => {
   return (
@@ -60,45 +61,8 @@ const HeroSection = () => {
           </div>
 
           {/* Right:  Card */}
-          <div className="relative" data-aos="fade-left">
-            <div className="bg-gradient-to-br from-primary/20 to-secondary/20 backdrop-blur-md rounded-3xl p-8 shadow-2xl border border-neutral/20">
-              <div className="bg-base-100/50 backdrop-blur-sm rounded-2xl p-6 space-y-4">
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center">
-                    <FaUtensils className="w-8 h-8 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-base-content">
-                      Donate in 2 Minutes
-                    </h3>
-                    <p className="text-xs text-muted">
-                      List food, set pickup, help someone.
-                    </p>
-                  </div>
-                </div>
-                <div className="h-px bg-neutral/30"></div>
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center">
-                    <FaArrowRight className="w-8 h-8 text-secondary rotate-[-45deg]" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-base-content">
-                      Pickup in Real-Time
-                    </h3>
-                    <p className="text-xs text-muted">
-                      Get notified, collect, reduce waste.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            {/* Floating Stats */}
-            <div className="absolute -top-6 -right-6 bg-base-100 rounded-2xl p-4 shadow-xl border border-neutral/20 text-center">
-              <div className="text-2xl font-bold text-primary">98%</div>
-              <p className="text-xs text-muted">Success Rate</p>
-            </div>
-          </div>
+          <UserInfoCarouselCard />
         </div>
       </Container>
     </section>

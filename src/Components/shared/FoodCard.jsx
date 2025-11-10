@@ -43,7 +43,9 @@ const FoodCard = ({ data }) => {
           </h3>
 
           {/* Description */}
-          <p className="text-sm text-muted line-clamp-2">{notes}</p>
+          <p title={notes} className="text-sm text-muted line-clamp-2 truncate">
+            {notes}
+          </p>
 
           {/* Distance & Time */}
           <div className="flex flex-col  items-center gap-4 text-xs text-muted">
