@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   FaMapMarkerAlt,
@@ -18,6 +18,7 @@ import { toast } from "react-toastify";
 
 const FoodDetails = () => {
   const { loading, user } = useContext(AuthContext);
+  const [requestButton, setRequestButton] = useState(false);
 
   const accessToken = user?.accessToken;
 
@@ -32,8 +33,6 @@ const FoodDetails = () => {
   const { name, image, quantity, pickup_location, expiry, notes, _id } =
     foodCardData || {};
 
-  // console.log(foodCardData);
-
   const {
     name: DonarName,
     email,
@@ -46,7 +45,17 @@ const FoodDetails = () => {
   const userEmail = user?.email;
   const photoURL = user?.photoURL;
 
-  console.log(user);
+  // ! conditional switch FoodRequest  button
+
+  useEffect(() => {
+    if (foodCardData?.donor?.email && userEmail) {
+      if (foodCardData.donor?.email === userEmail) {
+        setRequestButton(true);
+      } else {
+        setRequestButton(false);
+      }
+    }
+  }, [foodCardData, requestButton, userEmail]);
 
   if (loading) {
     return <LoadingSpinner />;
@@ -207,17 +216,36 @@ const FoodDetails = () => {
 
             {/* Request Button */}
             <div className="flex gap-4 flex-col md:flex-row">
-              <button
-                onClick={handleRequestModal}
-                className="btn btn-primary rounded-full shadow-none hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3 group">
-                Request Food
-              </button>
-              <Link
-                to={`/donor-profile/${_id}`}
-                className="btn btn-primary  rounded-full  shadow-none hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3 group">
-                Donar profile
-                <ImProfile className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              {/*  conditional switch button */}
+
+              {requestButton ? (
+                <Link
+                  className="btn btn-primary rounded-full shadow-none hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3 group"
+                  to={"/my-listings"}>
+                  My Listings
+                </Link>
+              ) : (
+                <button
+                  onClick={handleRequestModal}
+                  className="btn btn-primary rounded-full shadow-none hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3 group">
+                  Request Food
+                </button>
+              )}
+
+              {requestButton ? (
+                <Link
+                  to={"/user-profile"}
+                  className="btn btn-primary  rounded-full  shadow-none hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3 group">
+                  My Profile
+                </Link>
+              ) : (
+                <Link
+                  to={`/donor-profile/${_id}`}
+                  className="btn btn-primary  rounded-full  shadow-none hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3 group">
+                  Donar profile
+                  <ImProfile className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              )}
 
               <button className="btn btn-ghost  rounded-full p-3 hover:bg-base-200 transition-all">
                 <FaHeart className="w-6 h-6 text-base-content/70 hover:text-error transition-colors" />

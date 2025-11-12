@@ -51,7 +51,7 @@ const Navbar = () => {
 
   const loginUser = (
     <>
-      <div className="dropdown md:dropdown-end ">
+      <div className="dropdown dropdown-end">
         <div tabIndex={0} role="button">
           {user && (
             <div
@@ -67,35 +67,35 @@ const Navbar = () => {
         </div>
         <ul
           tabIndex={0}
-          className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[9999] mt-5 md:mt-4 w-60 p-4 shadow-xl border border-base-300 space-y-3">
+          className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[9999] mt-5 md:mt-4 w-60 p-3 border border-base-300 space-y-3">
           <Link
             to={"/user-profile"}
-            className="flex items-center w-full md:w-fit text-start sm:text-center gap-2 hover:text-primary transition-all">
+            className="flex items-center gap-3 hover:bg-primary/10 hover:text-primary transition-colors rounded-lg py-1  px-2">
             <FaUser className="text-primary" />
             Profile
           </Link>
           <Link
             to={"/my-request"}
-            className="flex items-center w-full md:w-fit text-start sm:text-center gap-2 hover:text-primary transition-all">
+            className="flex items-center gap-3 hover:bg-primary/10 hover:text-primary transition-colors rounded-lg py-1  px-2">
             <FaHandsHelping className="text-primary" />
             My Requests
           </Link>
           <Link
             to={"/my-listings"}
-            className="flex items-center w-full md:w-fit text-start sm:text-center gap-2 hover:text-primary transition-all">
+            className="flex items-center gap-3 hover:bg-primary/10 hover:text-primary transition-colors rounded-lg py-1  px-2">
             <FaListUl className="text-primary" />
             My Listings
           </Link>
 
           <Link
             to={"/add-food"}
-            className="flex items-center w-full  lg:w-fit  text-start gap-2 hover:text-primary transition-all">
+            className="flex items-center gap-3 hover:bg-primary/10 hover:text-primary transition-colors rounded-lg py-1  px-2">
             <IoIosAddCircle className="text-primary" />
             Add Food
           </Link>
           <button
             onClick={handleUserLogout}
-            className=" px-2 py-2 cursor-pointer border bg-secondary  text-base-content rounded-full shadow-none">
+            className=" px-3 py-2 btn-primary rounded-full bg-primary shadow-none cursor-pointer">
             Logout
           </button>
         </ul>
@@ -186,9 +186,7 @@ const Navbar = () => {
             <ThemeToggle />
             {user ? (
               <div className="flex items-center gap-5">
-                <div className="items-center justify-center hidden md:flex">
-                  {loginUser}
-                </div>
+                <div className="items-center justify-center ">{loginUser}</div>
               </div>
             ) : (
               <Link

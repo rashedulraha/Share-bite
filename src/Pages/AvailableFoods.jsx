@@ -17,8 +17,6 @@ const AvailableFoods = () => {
     return <LoadingSpinner />;
   }
 
-  console.log(foodCardData?.length);
-
   const handleOnSearch = (term) => {
     setSearchTerm(term.toLowerCase());
   };
