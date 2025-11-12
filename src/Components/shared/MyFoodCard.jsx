@@ -33,7 +33,7 @@ const MyFoodCard = ({ foods }) => {
             });
           })
           .catch((error) => {
-            toast.error("network error");
+            toast.error("network error", error.message);
           });
       }
     });

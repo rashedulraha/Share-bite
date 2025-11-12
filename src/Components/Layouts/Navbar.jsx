@@ -86,9 +86,16 @@ const Navbar = () => {
             <FaListUl className="text-primary" />
             My Listings
           </Link>
+
+          <Link
+            to={"/add-food"}
+            className="flex items-center w-full  lg:w-fit  text-start gap-2 hover:text-primary transition-all">
+            <IoIosAddCircle className="text-primary" />
+            Add Food
+          </Link>
           <button
             onClick={handleUserLogout}
-            className="btn btn-primary rounded-full shadow-none">
+            className=" px-2 py-2 cursor-pointer border bg-secondary  text-base-content rounded-full shadow-none">
             Logout
           </button>
         </ul>
@@ -117,12 +124,7 @@ const Navbar = () => {
           <FaBoxOpen className="text-primary" />
           Available Foods
         </NavLink>
-        <NavLink
-          to={"/add-food"}
-          className="flex items-center w-full  lg:w-fit  text-start gap-2 hover:text-primary transition-all">
-          <IoIosAddCircle className="text-primary" />
-          Add Food
-        </NavLink>
+
         {user && (
           <div className="flex items-start md:hidden bg-base-200 w-full p-2 rounded-full ">
             <div className="flex space-x-3 items-center">

@@ -32,7 +32,7 @@ const AuthProvider = ({ children }) => {
       );
 
       const user = userInformation.user;
-      await sendEmailVerification(user);
+      // await sendEmailVerification(user);
       return user;
     } catch (error) {
       toast.error("Registration failed");
@@ -98,7 +98,6 @@ const AuthProvider = ({ children }) => {
   // ! reset Password
 
   const resetPassword = async (email) => {
-    window.open("https://mail.google.com/mail/u/0/#inbox", "_blank");
     return sendPasswordResetEmail(auth, email);
   };
 

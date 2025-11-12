@@ -133,7 +133,7 @@ const ProfilePage = () => {
 
                 <button
                   onClick={handleSignout}
-                  className="btn btn-warning py-2 flex-1 rounded-full shadow-md hover:shadow-lg flex items-center justify-center gap-2">
+                  className="btn btn-warning py-2 flex-1 rounded-full shadow-md hover:shadow-lg flex items-center justify-center gap-2 md:hidden">
                   <FaSignOutAlt className="w-4 h-4" />
                   Logout
                 </button>
@@ -153,7 +153,7 @@ const ProfilePage = () => {
         <dialog
           ref={updateProfileModal}
           className="modal modal-bottom sm:modal-middle">
-          <div className="modal-box bg-base-100 rounded-3xl shadow-2xl border border-neutral/20 max-w-md w-full">
+          <div className="modal-box bg-base-100 rounded-md shadow-2xl border border-neutral/20 max-w-md w-full">
             {/* Header */}
             <div className="flex items-center justify-between mb-5 pb-3 border-b border-neutral/20">
               <h3 className="text-xl font-bold text-base-content">

@@ -12,6 +12,7 @@ import LoadingSpinner from "../Components/shared/LoadingSpinner";
 import useAxios from "../Hooks/useAxios";
 import FoodCard from "../Components/shared/FoodCard";
 import Skeleton from "../Components/shared/Skeleton";
+import FoodSearchSection from "../Components/Ui/FoodSearchSection";
 
 const Home = () => {
   const { loading } = useContext(AuthContext);
@@ -26,7 +27,6 @@ const Home = () => {
   return (
     <div>
       <HeroSection />
-
       <Container>
         {dataFetchLoading ? (
           <Skeleton url={`http://localhost:3000/popular-food-data`} />

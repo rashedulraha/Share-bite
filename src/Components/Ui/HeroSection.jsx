@@ -66,8 +66,44 @@ const HeroSection = () => {
           </div>
 
           {/* Right:  Card */}
+          <div className="flex items-center justify-center flex-col space-y-5">
+            <UserInfoCarouselCard />
+            <div>
+              <div className="flex  items-center justify-between  rounded-full border border-gray-200 overflow-hidden max-w-sm ">
+                <label
+                  htmlFor=""
+                  className="input border-none w-full outline-none">
+                  <svg
+                    className="h-[1em] opacity-50"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24">
+                    <g
+                      strokeLinejoin="round"
+                      strokeLinecap="round"
+                      strokeWidth="2.5"
+                      fill="none"
+                      stroke="currentColor">
+                      <circle cx="11" cy="11" r="8"></circle>
+                      <path d="m21 21-4.3-4.3"></path>
+                    </g>
+                  </svg>
+                  <input
+                    type="search"
+                    required
+                    // value={searchTerm}
+                    // onChange={handleInputChange}
+                    placeholder="Search products..."
+                    className="input input-ghost w-full placeholder:text-muted focus:outline-none focus:bg-transparent text-primary text-base "
+                  />
+                </label>
 
-          <UserInfoCarouselCard />
+                {/* Search Button */}
+                <button className="btn btn-primary rounded-l-none rounded-r-full ">
+                  Search
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </Container>
     </section>

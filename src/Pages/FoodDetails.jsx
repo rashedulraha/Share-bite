@@ -14,15 +14,19 @@ import { ImProfile } from "react-icons/im";
 import Container from "../Components/Responsive/Container";
 import useAxios from "../Hooks/useAxios";
 import AuthContext from "../Context/AuthContext";
+import { toast } from "react-toastify";
 
 const FoodDetails = () => {
-  const { loading } = useContext(AuthContext);
+  const { loading, user } = useContext(AuthContext);
 
   const { id } = useParams();
   const showModalRef = useRef();
   const { foodCardData } = useAxios(`http://localhost:3000/food-details/${id}`);
   const { name, image, quantity, pickup_location, expiry, notes, _id } =
     foodCardData || {};
+
+  // console.log(foodCardData);
+
   const {
     name: DonarName,
     email,
@@ -31,26 +35,11 @@ const FoodDetails = () => {
     joined,
   } = foodCardData?.donor || {};
 
-  // const food = {
-  //   name: "Chicken Biryani",
-  //   image:
-  //     "https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-  //   quantity: 12,
-  //   pickup_location: "Golden Dragon Restaurant, 123 Main St, Downtown",
-  //   expiry: "November 11, 2025",
-  //   notes:
-  //     "Freshly cooked, packed in airtight containers. Best for 2-3 people per portion. Halal certified. No MSG.",
-  //   donor: {
-  //     name: "Rahim Ahmed",
-  //     email: "rahim@goldendragon.com",
-  //     phone: "+880 1712-345678",
-  //     photo:
-  //       "https://ui-avatars.com/api/?name=Rahim+Ahmed&background=22d3a6&color=fff&bold=true",
-  //     rating: 4.8,
-  //     totalDonations: 42,
-  //     joined: "March 2023",
-  //   },
-  // };
+  const displayName = user?.displayName;
+  const userEmail = user?.email;
+  const photoURL = user?.photoURL;
+
+  console.log(user);
 
   if (loading) {
     return <LoadingSpinner />;
@@ -62,7 +51,40 @@ const FoodDetails = () => {
 
   const handleRequestFood = (e) => {
     e.preventDefault();
-    console.log("click modal");
+    // console.log("click modal");
+
+    const location = e.target.location.value;
+    const contactInfo = e.target.contactInfo.value;
+    const messageDonor = e.target.messageDonor.value;
+
+    const requestInfo = {
+      _id,
+      location,
+      contactInfo,
+      messageDonor,
+      displayName,
+      userEmail,
+      photoURL,
+      donorEmail: email,
+      status: "pending",
+    };
+
+    console.log(requestInfo);
+
+    fetch(`http://localhost:3000/food-requests`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(requestInfo),
+    })
+      .then(() => {
+        showModalRef.current.close();
+        toast.success("requested");
+      })
+      .then((error) => {
+        toast.error(error?.message);
+      });
   };
 
   return (
@@ -216,7 +238,7 @@ const FoodDetails = () => {
             </div>
 
             {/* Form Fields */}
-            <form className="space-y-5">
+            <form className="space-y-5" onSubmit={handleRequestFood}>
               {/* Quantity */}
               <div className="space-y-1">
                 <label className="label">
@@ -226,6 +248,7 @@ const FoodDetails = () => {
                 </label>
                 <input
                   type="text"
+                  name="location"
                   placeholder="Enter your location"
                   className="input input-bordered w-full rounded-lg focus:border-primary"
                 />
@@ -240,6 +263,7 @@ const FoodDetails = () => {
                 </label>
                 <input
                   type="text"
+                  name="contactInfo"
                   placeholder="Enter your email or phone number"
                   className="input input-bordered w-full rounded-lg focus:border-primary"
                 />
@@ -254,12 +278,12 @@ const FoodDetails = () => {
                 </label>
                 <textarea
                   rows="5"
+                  name="messageDonor"
                   placeholder="Let them know why you're interested..."
                   className="input input-bordered w-full rounded-lg focus:border-primary"
                 />
               </div>
               <button
-                onClick={handleRequestFood}
                 type="submit"
                 className="btn btn-success w-full rounded-full shadow-none transition-all duration-300">
                 Send Request
