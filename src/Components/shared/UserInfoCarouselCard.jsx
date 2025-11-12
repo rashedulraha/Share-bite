@@ -30,7 +30,7 @@ const UserInfoCarouselCard = () => {
       setIndex((prev) => (prev + 1) % features.length);
     }, 2000);
     return () => clearInterval(timer);
-  }, []);
+  }, [features.length]);
 
   const item = features[index];
 

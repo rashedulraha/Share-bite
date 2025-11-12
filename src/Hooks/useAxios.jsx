@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-const useAxios = (url) => {
+const useAxios = (url, token) => {
   const [foodCardData, setFoodCardData] = useState(null);
   const [error, setError] = useState(null);
   const [dataFetchLoading, setDataFetchLoading] = useState(true);
@@ -10,11 +10,18 @@ const useAxios = (url) => {
 
   useEffect(() => {
     setDataFetchLoading(true);
-    axios(url)
+    if (!url) return;
+
+    axios
+      .get(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((res) => setFoodCardData(res.data))
       .catch((error) => setError(error.message))
       .finally(() => setDataFetchLoading(false));
-  }, [url]);
+  }, [token, url]);
 
   return { foodCardData, error, dataFetchLoading };
 };

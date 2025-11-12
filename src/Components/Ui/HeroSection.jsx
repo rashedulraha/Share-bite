@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
-    <section className="relative  py-10 md:py-14  flex items-center justify-center overflow-hidden">
-      {/* Background Decor */}
+    <section className="relative py-10 md:py-14 flex items-center justify-center overflow-hidden">
+      {/* Background Decoration linier gradinent */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-20 left-20 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-20 right-20 w-80 h-80 bg-secondary/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
@@ -65,14 +65,14 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Right:  Card */}
-          <div className="flex items-center justify-center flex-col space-y-5">
-            <UserInfoCarouselCard />
-            <div>
-              <div className="flex  items-center justify-between  rounded-full border border-gray-200 overflow-hidden max-w-sm ">
-                <label
-                  htmlFor=""
-                  className="input border-none w-full outline-none">
+          {/* Right: New Layout */}
+          <div
+            className="flex flex-col items-center justify-center"
+            data-aos="fade-left">
+            {/* Search Bar at Top */}
+            <div className="w-full max-w-md mb-8">
+              <div className="flex items-center justify-between rounded-full border border-gray-200 overflow-hidden">
+                <label className="input border-none w-full outline-none">
                   <svg
                     className="h-[1em] opacity-50"
                     xmlns="http://www.w3.org/2000/svg"
@@ -90,18 +90,37 @@ const HeroSection = () => {
                   <input
                     type="search"
                     required
-                    // value={searchTerm}
-                    // onChange={handleInputChange}
                     placeholder="Search products..."
-                    className="input input-ghost w-full placeholder:text-muted focus:outline-none focus:bg-transparent text-primary text-base "
+                    className="input input-ghost w-full placeholder:text-muted focus:outline-none focus:bg-transparent text-primary text-base"
                   />
                 </label>
-
-                {/* Search Button */}
-                <button className="btn btn-primary rounded-l-none rounded-r-full ">
+                <button className="btn btn-primary rounded-l-none rounded-r-full">
                   Search
                 </button>
               </div>
+            </div>
+
+            {/* user Card with Decorative Elements */}
+            <div className="relative w-full max-w-md">
+              {/* decorative circles */}
+              <div className="absolute -top-4 -left-4 w-8 h-8 bg-primary/30 rounded-full"></div>
+              <div className="absolute -bottom-4 -right-4 w-8 h-8 bg-secondary/30 rounded-full"></div>
+
+              {/* Main card */}
+              <div className="relative bg-base-100 rounded-xl shadow-lg p-1 border border-base-300">
+                <UserInfoCarouselCard />
+              </div>
+
+              {/* Decorative lines */}
+              <div className="absolute top-1/2 -left-8 w-16 h-0.5 bg-primary/30"></div>
+              <div className="absolute top-1/2 -right-8 w-16 h-0.5 bg-secondary/30"></div>
+            </div>
+
+            {/* Additional Info */}
+            <div className="mt-8 text-center">
+              <p className="text-sm text-muted">
+                Join our community of food heroes making a difference
+              </p>
             </div>
           </div>
         </div>

@@ -19,9 +19,16 @@ import { toast } from "react-toastify";
 const FoodDetails = () => {
   const { loading, user } = useContext(AuthContext);
 
+  const accessToken = user?.accessToken;
+
   const { id } = useParams();
   const showModalRef = useRef();
-  const { foodCardData } = useAxios(`http://localhost:3000/food-details/${id}`);
+
+  const { foodCardData } = useAxios(
+    `http://localhost:3000/food-details/${id}`,
+    accessToken
+  );
+
   const { name, image, quantity, pickup_location, expiry, notes, _id } =
     foodCardData || {};
 
@@ -74,7 +81,7 @@ const FoodDetails = () => {
     fetch(`http://localhost:3000/food-requests`, {
       method: "POST",
       headers: {
-        "content-type": "application/json",
+        // authorization: "application/json",
       },
       body: JSON.stringify(requestInfo),
     })
