@@ -59,7 +59,9 @@ const Register = () => {
   }
 
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div
+      className="flex items-center justify-center h-screen"
+      data-aos="fade-up">
       <Container>
         <div className="md:w-md bg-base-100   mx-auto border border-secondary/30 rounded-md my-5">
           <div className="p-5  space-y-5">

@@ -60,8 +60,8 @@ const OurMission = () => {
             <p className="text-muted leading-relaxed">
               We believe that <strong>technology can bridge this gap</strong>.
               By connecting those with surplus food to those who need it, we
-              create a more <span className="text-primary">sustainable</span>{" "}
-              and <span className="text-secondary">compassionate</span>{" "}
+              create a more <span className="text-primary">sustainable</span>
+              and <span className="text-secondary">compassionate</span>
               community.
             </p>
 
@@ -89,7 +89,7 @@ const OurMission = () => {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="bg-base-100 rounded-2xl p-6 shadow-lg border border-neutral/20 hover:shadow-xl transition-all duration-300 group">
+                className="bg-base-100 rounded-md p-6 shadow-lg border border-neutral/20 hover:shadow-xl transition-all duration-300 group">
                 <div
                   className={`mb-4 ${feature.color} group-hover:scale-110 transition-transform inline-block`}>
                   {feature.icon}

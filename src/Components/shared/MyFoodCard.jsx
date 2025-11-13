@@ -255,7 +255,6 @@ const MyFoodCard = ({ foods }) => {
                   </button>
                 )}
               </form>
-              {/* if there is a button in form, it will close the modal */}
             </div>
           </div>
         </Container>

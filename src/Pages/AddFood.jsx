@@ -63,7 +63,7 @@ const AddFood = () => {
   };
 
   return (
-    <div className="flex items-center justify-center ">
+    <div className="flex items-center justify-center " data-aos="fade-up">
       <Container>
         <div className="md:w-2xl bg-base-100 mx-auto border border-secondary/30 rounded-xl my-5 shadow-lg">
           <div className="p-6 md:p-8 space-y-6">

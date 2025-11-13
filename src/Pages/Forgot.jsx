@@ -40,7 +40,9 @@ const Forgot = () => {
 
   return (
     <Container>
-      <div className="md:w-md bg-base-100 mx-auto border border-secondary/30 rounded-xl my-5 shadow-lg">
+      <div
+        className="md:w-md bg-base-100 mx-auto border border-secondary/30 rounded-xl my-5 shadow-lg"
+        data-aos="fade-up">
         <div className="p-6 md:p-8 space-y-6">
           {/* Title */}
           <div className="text-center">

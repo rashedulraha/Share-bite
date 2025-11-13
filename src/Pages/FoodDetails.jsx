@@ -67,7 +67,6 @@ const FoodDetails = () => {
 
   const handleRequestFood = (e) => {
     e.preventDefault();
-    // console.log("click modal");
 
     const location = e.target.location.value;
     const contactInfo = e.target.contactInfo.value;
@@ -90,7 +89,7 @@ const FoodDetails = () => {
     fetch(`http://localhost:3000/food-requests`, {
       method: "POST",
       headers: {
-        // authorization: "application/json",
+        "content-type": "application/json",
       },
       body: JSON.stringify(requestInfo),
     })
@@ -98,7 +97,7 @@ const FoodDetails = () => {
         showModalRef.current.close();
         toast.success("requested");
       })
-      .then((error) => {
+      .catch((error) => {
         toast.error(error?.message);
       });
   };
