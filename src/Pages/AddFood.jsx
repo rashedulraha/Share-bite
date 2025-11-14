@@ -42,13 +42,16 @@ const AddFood = () => {
     };
 
     try {
-      const res = await fetch("http://localhost:3000/all-food-data", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(imageAndDonarInfo),
-      });
+      const res = await fetch(
+        "https://share-bite-backend.vercel.app/all-food-data",
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(imageAndDonarInfo),
+        }
+      );
 
       const data = await res.json();
       if (res.ok) {

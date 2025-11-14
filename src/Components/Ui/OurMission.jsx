@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  FaHeart,
-  FaLeaf,
-  FaUsers,
-  FaClock,
-  FaHandsHelping,
-} from "react-icons/fa";
+import { FaHeart, FaLeaf, FaUsers, FaClock } from "react-icons/fa";
 import Container from "../Responsive/Container";
 
 const OurMission = () => {
@@ -43,7 +37,7 @@ const OurMission = () => {
   ];
 
   return (
-    <section className="py-16 md:py-20 bg-base-200">
+    <section className="py-16 md:py-20 bg-base-200 overflow-x-hidden">
       <Container>
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Left: Mission Text */}

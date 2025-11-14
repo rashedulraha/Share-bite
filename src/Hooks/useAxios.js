@@ -10,14 +10,13 @@ const useAxios = (url, token) => {
 
   useEffect(() => {
     setDataFetchLoading(true);
-    if (!url && !token) return;
+    if (!url) return;
 
-    axios
-      .get(url, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+    axios(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((res) => setFoodCardData(res.data))
       .catch((error) => setError(error.message))
       .finally(() => setDataFetchLoading(false));

@@ -26,7 +26,7 @@ const FoodDetails = () => {
   const showModalRef = useRef();
 
   const { foodCardData } = useAxios(
-    `http://localhost:3000/food-details/${id}`,
+    `https://share-bite-backend.vercel.app/food-details/${id}`,
     accessToken
   );
 
@@ -64,8 +64,7 @@ const FoodDetails = () => {
   const handleRequestModal = () => {
     showModalRef.current.showModal();
   };
-
-  const handleRequestFood = (e) => {
+  const handleRequestFood = async (e) => {
     e.preventDefault();
 
     const location = e.target.location.value;
@@ -84,22 +83,20 @@ const FoodDetails = () => {
       status: "pending",
     };
 
-    console.log(requestInfo);
-
-    fetch(`http://localhost:3000/food-requests`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(requestInfo),
-    })
-      .then(() => {
-        showModalRef.current.close();
-        toast.success("requested");
-      })
-      .catch((error) => {
-        toast.error(error?.message);
+    try {
+      fetch(`http://localhost:3000/food-requests`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestInfo),
       });
+
+      showModalRef.current.close();
+      toast.success("Requested successfully");
+    } catch (error) {
+      toast.error(error?.message || "Something went wrong");
+    }
   };
 
   return (

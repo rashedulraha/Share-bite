@@ -12,8 +12,11 @@ const MyListings = () => {
   const { user, loading } = useContext(AuthContext);
   const [myFoods, setMyFoods] = useState([]);
 
+  const token = user.accessToken;
+
   const { foodCardData } = useAxios(
-    `http://localhost:3000/my-listings?email=${user?.email}`
+    `https://share-bite-backend.vercel.app/my-listings?email=${user?.email}`,
+    token
   );
 
   useEffect(() => {

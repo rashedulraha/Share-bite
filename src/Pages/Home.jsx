@@ -12,12 +12,11 @@ import LoadingSpinner from "../Components/shared/LoadingSpinner";
 import useAxios from "../Hooks/useAxios";
 import FoodCard from "../Components/shared/FoodCard";
 import Skeleton from "../Components/shared/Skeleton";
-import FoodSearchSection from "../Components/Ui/FoodSearchSection";
 
 const Home = () => {
   const { loading } = useContext(AuthContext);
   const { foodCardData, dataFetchLoading } = useAxios(
-    `http://localhost:3000/popular-food-data`
+    `https://share-bite-backend.vercel.app/popular-food-data`
   );
 
   if (loading) {
@@ -29,7 +28,9 @@ const Home = () => {
       <HeroSection />
       <Container>
         {dataFetchLoading ? (
-          <Skeleton url={`http://localhost:3000/popular-food-data`} />
+          <Skeleton
+            url={`https://share-bite-backend.vercel.app/popular-food-data`}
+          />
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 py-10">
             {foodCardData?.map((data) => (

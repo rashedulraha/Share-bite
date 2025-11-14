@@ -16,11 +16,9 @@ const MyRequests = () => {
 
     const fetchRequests = async () => {
       try {
-        const res = await fetch(
-          `http://localhost:3000/food-requests?email=${user.email}`
-        );
-        const data = await res.json();
-        setMyRequests(data);
+        fetch(`http://localhost:3000/food-requests?email=${user.email}`)
+          .then((res) => res.json())
+          .then((resultData) => setMyRequests(resultData));
       } catch (error) {
         toast.error("Failed to load requests");
       }

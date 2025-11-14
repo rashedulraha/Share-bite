@@ -124,23 +124,6 @@ const Navbar = () => {
           <FaBoxOpen className="text-primary" />
           Available Foods
         </NavLink>
-
-        {user && (
-          <div className="flex items-start md:hidden bg-base-200 w-full p-2 rounded-full ">
-            <div className="flex space-x-3 items-center">
-              <div>
-                <Link className="flex items-center gap-3 " to={"/user-profile"}>
-                  <img
-                    className="-full border hover:bg-primary hover:text-white transition-all w-8 md:w-10 h-8 md:h-10 cursor-pointer rounded-full"
-                    src={photoURL}
-                    alt="user Image"
-                  />{" "}
-                  Account
-                </Link>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </>
   );

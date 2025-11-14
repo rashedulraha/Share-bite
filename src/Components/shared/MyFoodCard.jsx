@@ -1,12 +1,15 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { FaClock, FaEdit, FaMapMarkerAlt, FaTrash } from "react-icons/fa";
 import { toast } from "react-toastify";
 import Container from "../Responsive/Container";
 import Swal from "sweetalert2";
+import AuthContext from "../../Context/AuthContext";
 
 const MyFoodCard = ({ foods }) => {
   const { image, foodName, notes, pickup_location, quantity, expiry, _id } =
     foods || {};
+
+  const { user } = useContext(AuthContext);
 
   const handleOpenModal = useRef();
   const [loading, setLoading] = useState(false);
@@ -19,11 +22,14 @@ const MyFoodCard = ({ foods }) => {
       showCancelButton: true,
       confirmButtonColor: "#22d3a6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Me logout",
+      confirmButtonText: "Yes, delete",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/delete-food-data/${id}`, {
+        fetch(`https://share-bite-backend.vercel.app/delete-food-data/${id}`, {
           method: "DELETE",
+          headers: {
+            authorization: `Bearer ${user.accessToken}`,
+          },
         })
           .then(() => {
             Swal.fire({
@@ -60,10 +66,11 @@ const MyFoodCard = ({ foods }) => {
       notes,
     };
 
-    fetch(`http://localhost:3000/update-food/${_id}`, {
+    fetch(`https://share-bite-backend.vercel.app/update-food/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${user.accessToken}`,
       },
       body: JSON.stringify(update),
     }).then(() => {

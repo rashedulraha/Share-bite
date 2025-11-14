@@ -9,7 +9,7 @@ import FoodSearchSection from "../Components/Ui/FoodSearchSection";
 const AvailableFoods = () => {
   const { loading } = useContext(AuthContext);
   const { foodCardData, dataFetchLoading } = useAxios(
-    `http://localhost:3000/all-food-data`
+    `https://share-bite-backend.vercel.app/all-food-data`
   );
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -34,7 +34,9 @@ const AvailableFoods = () => {
         <div className="py-10">
           {filterFood?.length > 0 ? (
             dataFetchLoading ? (
-              <Skeleton url={`http://localhost:3000/all-food-data`} />
+              <Skeleton
+                url={`https://share-bite-backend.vercel.app/all-food-data`}
+              />
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filterFood.map((data) => (
